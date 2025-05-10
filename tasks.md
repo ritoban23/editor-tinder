@@ -9,3 +9,16 @@
 - what are dependencies
 - what is '-g' while installing nodemon
 - difference between caret and tilde(^ vs ~) while writing version
+
+- initialize git
+- .gitignore
+- create a remote repo on github
+- put all code to remote origin
+- play with routes and route extensions eg- /hello, /, /hello/2 
+- order of the routes matter a lot
+- install postman and make a workspace/collection, test an API call
+- write logic to handle GET , POST , PATCH , DELETE API calls and test them on postman
+- explore routing and use of ?, +, (), * in the routes
+- use of regex in routes /a/ , /.*fly$/
+- reading the query params in the routes
+- reading the dynamic routes
