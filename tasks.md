@@ -22,3 +22,23 @@
 - use of regex in routes /a/ , /.*fly$/
 - reading the query params in the routes
 - reading the dynamic routes
+
+- multiple route handlers - play with the code
+- next()
+- next() and errors along with res.send()
+- app.use ("/route", rh1,rh2,[rh4 , rh5],rh6); - roye handlers can be grouped in array
+- middlewares
+- handling requests behind the scenes
+- app.use() vs app.all()
+- write a dummy auth middleware for admin
+- write a dummy auth middleware for all user routes
+- error handling using app.use("/", (err, req, res, next) => {});
+
+- create a free cluster on MongoDB official website (Mongo atlas)
+- install mongoose library
+- connect ur application to the database by using "connection-url/editorTinder
+- call the connectDB function adn connect to atabase before starting application at 7777
+- create a user scema and user model
+- create a POST /signup API to add data to database
+- push some documents using API calls from postman
+- error handling using try catch block
