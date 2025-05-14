@@ -42,3 +42,18 @@
 - create a POST /signup API to add data to database
 - push some documents using API calls from postman
 - error handling using try catch block
+
+- js object vs json difference
+- add the express.json middleware to your app
+- make your signup API dynamic to recieve data from end user (postman)
+- when User.findOne() for duplicate email id , which object will be returned
+- API - get user by email 
+- API - feed API - GET /feed - get all the users from database
+- API - get users by ID
+- create a delete user API 
+- PATCH vs PUT difference 
+- API - update a user
+- explore the mongoose documentation for more model methods
+- what are the options in Model.findOneAndUpdate() method and explore more about it
+- API - update user with emailId
+
