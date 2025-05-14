@@ -65,5 +65,11 @@
 - add timestamps to the userSchema
 - add API level validation and sign up POST API
 - data sanitizing - add API validation for each field
-- install validator library
+- install npm validator library
 - explore validator library functions for passwoed, email etc
+
+- validate data in signup API using seperate helper function 
+- install bcrypt package
+- create and store password has using bcrypt
+- create login API 
+- compare passwords and throw error if invalid credentials

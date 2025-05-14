@@ -2,18 +2,59 @@ const express = require('express');
 const connectDB = require("./config/database");
 const app = express();
 const User = require("./models/user");
+const { validateSignupData } = require("./utils/validation");
+const bcrypt = require("bcrypt");
 
 app.use(express.json());
 
 //create user(signup)
 app.post("/signup", async (req, res) => {
-    const user = new User(req.body);
-
     try {
+        const {password,firstName,lastName,email,age,gender} = req.body;
+        //validate user data
+        validateSignupData(req);
+
+        //encrypt password
+        const passwordHash = await bcrypt.hash(password,10);
+        
+        //create new instance of user model
+        const user = new User({
+            firstName,
+            lastName,
+            email,
+            password : passwordHash,
+            age,
+            gender,
+        } );
+
         await user.save();
         res.send("User created successfully");
     } catch (err) {
         res.status(400).send("error creating user" + err.message);
+    }
+});
+
+//login user
+app.post("/login", async (req, res) => {
+
+    try {
+        const { email, password } = req.body;
+        //find user by email
+        const user = await User.findOne({ email : email });
+        if (!user) {
+            throw new Error("Invalid credentials");
+        }
+
+        //compare password
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (isMatch) {
+            res.send("Login successful");
+        }
+        else {
+            throw new Error("Invalid credentials");
+        }
+    } catch (err) {
+        res.status(400).send("ERROR: " + err.message);
     }
 });
 
