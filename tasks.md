@@ -73,3 +73,14 @@
 - create and store password has using bcrypt
 - create login API 
 - compare passwords and throw error if invalid credentials
+
+- install cookie parser
+- send a summy cookie to user
+- create GET /profile API and check if you get the cookei back
+- isntall jsonwebtoken
+- in /login API after emial and password validation , create a jwt token and send to to user in cookie
+- read the cookie inside the profile API and find the logged in user
+- userAuth middleware
+- add the userAuth middleware in the profile API and a new sendConnectionRequest API
+- set the expiry of JWT token and cookeis to 7 days if you want
+- 

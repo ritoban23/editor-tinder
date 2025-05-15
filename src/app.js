@@ -6,6 +6,7 @@ const { validateSignupData } = require("./utils/validation");
 const bcrypt = require("bcrypt");
 const cookieParser = require('cookie-parser');
 const jwt = require("jsonwebtoken");
+const { userAuth } = require("./middlewares/auth");
 
 app.use(express.json());
 app.use(cookieParser());
@@ -49,14 +50,13 @@ app.post("/login", async (req, res) => {
         }
 
         //compare password
-        const isMatch = await bcrypt.compare(password, user.password);
+        const isMatch = await user.validatePassword(password);
         if (isMatch) {
             //create a jwt token
-            const token = await jwt.sign({ _id : user._id},"Editor@tinder$99")
-            console.log(token);
+            const token = await user.getJWT();
 
             //add the token to cookie and send the response back to the user
-            res.cookie("token", token);
+            res.cookie("token", token ,{expires: new Date(Date.now() + 8*3600000)});//cookie will expire in 8 hours
             res.send("User logged in successfully");
         }
         else {
@@ -67,17 +67,23 @@ app.post("/login", async (req, res) => {
     }
 });
 
-app.get("/profile", async (req, res) => {
-    const cookies = req.cookies;
+app.get("/profile",userAuth, async (req, res) => {
+try {
+    const user = req.user;
+    res.send(user);
+    } catch (err) {
+        res.status(400).send("ERROR: " + err.message);
+    }
+});
 
-    const {token} = cookies;
-
-    const decodedMessage = await jwt.verify(token, "Editor@tinder$99");
-
-    const { _id } = decodedMessage;
-
-    console.log("user logged in with id: " + _id);
-    res.send("reading cookies");
+app.post("/sendConnectionRequest", userAuth, async (req, res) => {
+    try {
+        const user = req.user;
+        console.log("sending connection request");
+        res.send(user.firstName + " sent connection request");
+    } catch (err) {
+        res.status(400).send("ERROR: " + err.message);
+    }
 });
 
 //get user by email(login)
